@@ -46,7 +46,7 @@ class ArrayDataTest extends \PHPUnit_Framework_TestCase
     /**
      * Test the get function.
      *
-     * @depends testReset
+     * @depends testRaw
      */
     public function testGet()
     {
@@ -57,5 +57,6 @@ class ArrayDataTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame("hello", $arrayData->get("data.value"));
         $this->assertSame("world", $arrayData->get("data.value.broken", "world"));
+        $this->assertSame($data, $arrayData->get(""));
     }
 }

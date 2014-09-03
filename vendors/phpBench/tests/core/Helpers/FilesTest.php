@@ -56,7 +56,7 @@ class FilesTest extends \PHPUnit_Framework_TestCase
     /**
      * Test the rglob function.
      *
-     * @depends testRrmdir
+     * @depends testAvailable
      */
     public function testRglob()
     {
