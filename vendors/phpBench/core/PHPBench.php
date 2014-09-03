@@ -1,0 +1,177 @@
+<?php
+/**
+ * phpBench library.
+ *
+ * Defines the main phpBench class.
+ *
+ * @author Orgun109uk <orgun109uk@gmail.com>
+ * @license LGPL v3 (See LICENSE file)
+ * @copyright Copyright (c) 2014
+ *
+ * Inspired by PHPBench <https://github.com/mnapoli/PHPBench>
+ */
+
+namespace phpBench;
+
+require_once __DIR__ . "/Utils/ArrayData.php";
+require_once __DIR__ . "/Helpers/Files.php";
+require_once __DIR__ . "/BenchCase.php";
+require_once __DIR__ . "/BenchCase/DryRun.php";
+
+use phpBench\Utils\ArrayData;
+
+/**
+ * The main phpBench class.
+ */
+class PHPBench
+{
+    /**
+     * The configuration object.
+     *
+     * @var \phpBench\Utils\ArrayData
+     * @access protected
+     */
+    protected $config;
+
+    /**
+     * An array of found/registered bench cases.
+     *
+     * @var array
+     * @access protected
+     */
+    protected $benchCases = [];
+
+    /**
+     * An array containing the results of the last run.
+     *
+     * @var array
+     * @access protected
+     */
+    protected $results = [];
+
+    /**
+     * The PHPBench class constructor.
+     *
+     * @param array $config (optional)
+     *   The config to pass to the runner.
+     *
+     * @access public
+     */
+    final public function __construct(array $config = [])
+    {
+        $this->config = new ArrayData(array_merge([
+            "reportFile" => false,
+            "dir" => false,
+            "exclude" => false,
+        ], $config));
+    }
+
+    /**
+     * Returns all the bench case of a directory
+     *
+     * The files where bench cases are looked for are named "XxxBench.php"
+     *
+     * @return array(BenchCase) Array of bench cases classes
+     */
+    public function import($paths)
+    {
+        if (is_array($paths)) {
+            foreach ($paths as $path) {
+                $this->import($path);
+            }
+        } elseif (is_dir($paths)) {
+            // Search the directory for bench cases (*Bench.php).
+        } elseif (is_file($paths)) {
+            // Load the bench case.
+            require_once $paths;
+
+            $classname = basename($paths, ".php");
+            if (!class_exists($classname)) {
+                throw new \Exception(
+                    strtr(
+                        ":classname could not be found, note phpBench does not support namespaces.",
+                        [
+                            ":classname" => $classname,
+                        ]
+                    )
+                );
+            }
+
+            $benchCase = new $classname();
+            if (!$benchCase instanceof \phpBench\BenchCase) {
+                throw new \Exception(
+                    strtr(
+                        ":classname must extend from phpBench\BenchCase.",
+                        [
+                            ":classname" => $classname,
+                        ]
+                    )
+                );
+            }
+
+            $this->benchCases[$classname] = $benchCase;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Run the bench case.
+     *
+     * @access public
+     * @final
+     */
+    final public function run()
+    {
+        $this->results = [];
+        foreach ($this->benchCases as $benchCaseName => $benchCase) {
+            // Calibrate the base time.
+            $baseTime = $this->calibrate($benchCase->config->get("iterations"));
+
+            // Run the bench case.
+            $results = $benchCase->run();
+
+            // Render the results.
+            $this->results[$benchCaseName] = [
+                "base-time" => $baseTime,
+                "results" => $results,
+            ];
+        }
+    }
+
+    /**
+     * Calibrate the bench.
+     *
+     * @param int $iterations
+     *   The number of iterations to run.
+     *
+     * @return float
+     *   The execution time of an empty bench.
+     *
+     * @access public
+     * @final
+     */
+    final public function calibrate($iterations)
+    {
+        // Create the dry run bench case and run it.
+        $benchCase = new DryRun([ "iterations" => $iterations ]);
+        $results = $benchCase->run();
+
+        // Return the run time of the bench test.
+        return array_pop($results["tests"]);
+    }
+
+    /**
+     * Get the results from the last run.
+     *
+     * @return array
+     *   An array of results.
+     *
+     * @access public
+     * @final
+     */
+    public function getResults()
+    {
+        return $this->results;
+    }
+}

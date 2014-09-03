@@ -1,0 +1,6 @@
+# Ignore composer and NPM folders.
+node_modules/*
+composer_modules/*
+
+reports/*
+docs/*
