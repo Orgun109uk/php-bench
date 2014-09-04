@@ -1,9 +1,23 @@
 {
-	"folders":
-	[
-		{
-			"follow_symlinks": true,
-			"path": "."
-		}
-	]
+    "folders":
+    [
+        {
+            "follow_symlinks": true,
+            "path": "."
+        }
+    ],
+    "settings":
+    {
+        "rulers": [ 80, 120 ],
+        "tab_size": 4,
+        "detect_indentation": false,
+        "translate_tabs_to_spaces": true,
+        "trim_trailing_white_space_on_save": true,
+        "ensure_newline_at_eof_on_save": false,
+        "default_line_ending": "unix",
+        "word_wrap": false,
+        "preview_on_click": false,
+        "highlight_line": true,
+        "highlight_modified_tabs": true
+    }
 }

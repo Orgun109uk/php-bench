@@ -56,24 +56,33 @@ class PHPBench
      *   The config to pass to the runner.
      *
      * @access public
+     * @final
      */
     final public function __construct(array $config = [])
     {
         $this->config = new ArrayData(array_merge([
-            "reportFile" => false,
             "dir" => false,
-            "exclude" => false,
         ], $config));
+
+        $directory = $this->config->get("dir", false);
+        if ($directory) {
+            $this->import($directory);
+        }
     }
 
     /**
-     * Returns all the bench case of a directory
+     * Import any *Bench.php files provided in the paths or as a filename.
      *
-     * The files where bench cases are looked for are named "XxxBench.php"
+     * @param string|array $paths
+     *   Either a filename/directory or an array of filenames/directories.
      *
-     * @return array(BenchCase) Array of bench cases classes
+     * @@return \phpBench\PHPBench
+     *   Returns self.
+     *
+     * @access public
+     * @final
      */
-    public function import($paths)
+    final public function import($paths)
     {
         if (is_array($paths)) {
             foreach ($paths as $path) {
@@ -118,6 +127,9 @@ class PHPBench
     /**
      * Run the bench case.
      *
+     * @return \phpBench\PHPBench
+     *   Returns self.
+     *
      * @access public
      * @final
      */
@@ -137,6 +149,8 @@ class PHPBench
                 "results" => $results,
             ];
         }
+
+        return $this;
     }
 
     /**
@@ -170,7 +184,7 @@ class PHPBench
      * @access public
      * @final
      */
-    public function getResults()
+    final public function getResults()
     {
         return $this->results;
     }

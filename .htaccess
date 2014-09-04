@@ -1,0 +1,12 @@
+# Refuse direct access to all files.
+Order deny,allow
+Deny from all
+Allow from 127.0.0.1
+
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^ index.php [L]
+</IfModule>
