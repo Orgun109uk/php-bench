@@ -3,7 +3,7 @@ php:
   - 5.5
   - 5.4
   - hhvm
-install:
+before_install:
   - npm install -g grunt-cli
 install:
   - composer install
