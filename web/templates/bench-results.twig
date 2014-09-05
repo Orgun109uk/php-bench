@@ -1,21 +1,24 @@
     <div class="panel-table collapse">
         <table class="table">
             {% for name, test in tests %}
+            {% set additionalTime = test.time - minTime %}
+            {% set additionalTimePercentage = additionalTime * 100 / maxTime %}
+            {% set timePercentage = 100 - additionalTimePercentage %}
             <tr>
-                <td width="150">
+                <td>
                     <div class="progress">
-                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 10%">
-                            +10µs
-                        </div>
-                        <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%">
+                        <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="{{ timePercentage }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ timePercentage }}%">
                             {{ test.time }}µs
                         </div>
+                        {% if additionalTimePercentage > 0 %}
+                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{ additionalTimePercentage }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ additionalTimePercentage }}%"></div>
+                        {% endif %}
                     </div>
+                    <small>+{{ additionalTime }}µs</small>
                 </td>
-                <td><strong>{{ name }}</strong></td>
-            </tr>
-            <tr>
-                <td colspan="2">{{ test.details|nl2br }}</td>
+                <td>
+                    <strong>{{ name }}</strong><br>{{ test.details|nl2br }}
+                </td>
             </tr>
             {% endfor %}
         </table>

@@ -1,4 +1,4 @@
-<div id="test-{{ index }}" class="panel panel-default">
+<div id="test-{{ index }}" class="panel panel-default bench-test-panel">
 
     {# The bench title and test count. #}
     <div class="panel-heading">
@@ -17,7 +17,7 @@
     </div>
 
     {# The results table, inside a div to allow for collapsing. #}
-    {% include "bench-results.twig" with { "tests": result.results.tests } only %}
+    {% include "bench-results.twig" with { "tests": result.results.tests, "minTime": result.results.min, "maxTime": result.results.max } only %}
 
     {# The bench. #}
     <div class="panel-footer"><small>{{ result.results.filename }}</small></div>
