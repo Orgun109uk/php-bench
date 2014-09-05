@@ -4,3 +4,4 @@ composer_modules/*
 
 reports/*
 docs/*
+web/cache/*
