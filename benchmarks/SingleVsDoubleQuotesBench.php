@@ -9,57 +9,85 @@
  * @copyright Copyright (c) 2014
  */
 
-use phpBench\BenchCase;
-
 /**
 * PHP quotes bench
 */
-class SingleVsDoubleQuotesBench extends BenchCase
+class SingleVsDoubleQuotesBench extends \phpBench\BenchCase
 {
-    protected function config(array $config)
+    /**
+     * An internal event to return the custom bench configuration.
+     *
+     * @param array $config (optional) []
+     *   A default config to pass to the internal configuration method, this may not actually get used by all cases.
+     *
+     * @return array
+     *   The configuration options.
+     *
+     * @access protected
+     */
+    protected function config(array $config = [])
     {
         return [
-            "iterations" => 1,
-            "title" => "",
-            "description" => "",
-        ]; //500000
+            "iterations" => 1000,
+            "title" => "Quote types",
+            "description" => "See if there's any differences in using double (\") and single (') quotes for strings " .
+                "with 1,000 iterations.",
+        ];
     }
 
-    public function benchSingleQuotes1()
+    /**
+     * An empty string using single (') quotes ($foo = '').
+     */
+    public function benchSingleQuotesEmpty()
     {
-        $foo = 'test';
+        $foo = '';
     }
 
-    public function benchSingleQuotes2()
+    /**
+     * An empty string using double (") quotes ($foo = "");
+     */
+    public function benchDoubleQuotesEmpty()
     {
-        $foo = 'test'.'test';
+        $foo = "";
     }
 
-    public function benchSingleQuotes3()
+    /**
+     * A string with 20 characters using single (') quotes ($foo = 'abcde12345fghij67890');
+     */
+    public function benchSingleQuotes20Chars()
     {
-        $bar = 'blah';
-        $foo = 'test '.$bar.' test';
+        $foo = 'abcde12345fghij67890';
     }
 
-    public function benchDoubleQuotes1()
+    /**
+     * A string with 20 characters using double (") quotes ($foo = "abcde12345fghij67890");
+     */
+    public function benchDoubleQuotes20Chars()
     {
-        $foo = "test";
+        $foo = "abcde12345fghij67890";
     }
 
-    public function benchDoubleQuotes2()
+    /**
+     * A string with 16 characters and 4 $ using single (') quotes ($foo = 'abc$ 123$ fgh$ 678$ ');
+     */
+    public function benchSingleQuotes16Chars4Dollars()
     {
-        $foo = "test"."test";
+        $foo = 'abc$ 123$ fgh$ 678$ ';
     }
 
-    public function benchDoubleQuotes3()
+    /**
+     * A string with 16 characters and 4 $ using double (") quotes ($foo = "abc$ 123$ fgh$ 678$ ");
+     */
+    public function benchDoubleQuotes16Chars4Dollars()
     {
-        $bar = "blah";
-        $foo = "test ".$bar." test";
+        $foo = "abc$ 123$ fgh$ 678$ ";
     }
 
-    public function benchDoubleQuotes4()
+    /**
+     * A string with 16 characters and 4 escaped $ using double (") quotes ($foo = "abc\$ 123\$ fgh\$ 678\$ ");
+     */
+    public function benchDoubleQuotes16Chars4DollarsEscaped()
     {
-        $bar = "blah";
-        $foo = "test $bar test";
+        $foo = "abc\$ 123\$ fgh\$ 678\$ ";
     }
 }
