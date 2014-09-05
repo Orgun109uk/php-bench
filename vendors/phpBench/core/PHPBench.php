@@ -18,7 +18,9 @@ require_once __DIR__ . "/Helpers/Files.php";
 require_once __DIR__ . "/BenchCase.php";
 require_once __DIR__ . "/BenchCase/DryRun.php";
 
+use phpBench\BenchCase\DryRun;
 use phpBench\Utils\ArrayData;
+use phpBench\Helpers\Files;
 
 /**
  * The main phpBench class.
@@ -90,6 +92,8 @@ class PHPBench
             }
         } elseif (is_dir($paths)) {
             // Search the directory for bench cases (*Bench.php).
+            $files = Files::rglob("{$paths}/*Bench.php");
+            $this->import($files);
         } elseif (is_file($paths)) {
             // Load the bench case.
             require_once $paths;
@@ -138,7 +142,7 @@ class PHPBench
         $this->results = [];
         foreach ($this->benchCases as $benchCaseName => $benchCase) {
             // Calibrate the base time.
-            $baseTime = $this->calibrate($benchCase->config->get("iterations"));
+            $baseTime = $this->calibrate($benchCase->getConfig("iterations"));
 
             // Run the bench case.
             $results = $benchCase->run();
@@ -146,6 +150,8 @@ class PHPBench
             // Render the results.
             $this->results[$benchCaseName] = [
                 "base-time" => $baseTime,
+                "title" => $benchCase->getConfig("title", ""),
+                "description" => $benchCase->getConfig("description", ""),
                 "results" => $results,
             ];
         }
@@ -172,7 +178,7 @@ class PHPBench
         $results = $benchCase->run();
 
         // Return the run time of the bench test.
-        return array_pop($results["tests"]);
+        return array_pop($results["tests"])["time"];
     }
 
     /**

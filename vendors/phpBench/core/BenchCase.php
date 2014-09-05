@@ -31,6 +31,14 @@ abstract class BenchCase
     protected $config;
 
     /**
+     * An internal property to store the start time.
+     *
+     * @var string
+     * @access private
+     */
+    private $startTime;
+
+    /**
      * An internal event to return the custom bench configuration.
      *
      * @param array $config (optional) []
@@ -42,6 +50,64 @@ abstract class BenchCase
      * @access protected
      */
     abstract protected function config(array $config = []);
+
+    /**
+     * Set the start time.
+     *
+     * @access private
+     */
+    final private function startTimer()
+    {
+        $this->startTime = microtime();
+    }
+
+    /**
+     * Set the end time and return the resulting time in microseconds.
+     *
+     * @return float
+     *   The time take in microseconds.
+     *
+     * @access protected
+     */
+    final private function endTimer()
+    {
+        $endTime = microtime();
+
+        $startE = explode(" ", $this->startTime);
+        $endE = explode(" ", $endTime);
+
+        return round(($endE[0] - $startE[0]) * 1000, 4);
+    }
+
+    /**
+     * Format the comment given from the Reflection method.
+     *
+     * @param string $docComment
+     *   The original doc comment.
+     *
+     * @return string
+     *   The formatted comment block.
+     *
+     * @access private
+     */
+    final private function formatComment($docComment)
+    {
+        $comments = explode("\n", $docComment);
+        $comment = "";
+        foreach ($comments as $line) {
+            $line = trim($line);
+            if ($line === "/**") {
+                continue;
+            } elseif (strpos($line, "* @") === 0 || $line === "*/") {
+                break;
+            }
+
+            $line = substr($line, 2);
+            $comment .= "{$line}\n";
+        }
+
+        return trim($comment);
+    }
 
     /**
      * The bench case constructor.
@@ -56,7 +122,7 @@ abstract class BenchCase
     {
         $this->config = new ArrayData(array_merge([
             "iterations" => 0,
-        ], $this->onConfig($config)));
+        ], $this->config($config)));
 
         if ($this->config->get("iterations") <= 0) {
             throw new \Exception(
@@ -165,10 +231,13 @@ abstract class BenchCase
     final public function run()
     {
         $tests = $this->getTests();
+        $ref = new \ReflectionClass($this);
+
         $results = [
             "name" => get_class($this),
-            "filename" => __FILE__,
-            "overall" => 0,
+            "filename" => ltrim(str_replace(getcwd(), "", $ref->getFileName()), "/"),
+            "min" => 99999999,
+            "max" => -99999999,
             "tests" => [],
         ];
 
@@ -180,18 +249,25 @@ abstract class BenchCase
             // Set up the test.
             $this->setUpTest();
 
-            // Start the timer.
-            $timeStart = microtime(true);
-            for ($i = 0; $i < $this->config->get("iterations"); $i++) {
+            // Get the number of iterations to run, do it here so that collecting this info will not affect the test
+            // times.
+            $iterations = $this->config->get("iterations");
+
+            // Start the timer, run the iterations, and then end the timer.
+            $this->startTimer();
+            for ($i = 0; $i < $iterations; $i++) {
                 $this->$test();
             }
+            $endTime = $this->endTimer();
 
-            // End the timer.
-            $timeEnd = microtime(true);
-            $results["tests"][$test] = $timeEnd - $timeStart;
+            $results["tests"][$test] = [
+                "details" => $this->formatComment($ref->getMethod($test)->getDocComment()),
+                "time" => $endTime,
+            ];
 
-            // Updated the overall time taken.
-            $results["overall"] += $results["tests"][$test];
+            // Updated the min/max times.
+            $results["min"] = min($results["min"], $endTime);
+            $results["max"] = max($results["max"], $endTime);
 
             // Tear down the test.
             $this->tearDownTest();
