@@ -1,0 +1,24 @@
+<div id="test-{{ index }}" class="panel panel-default">
+
+    {# The bench title and test count. #}
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#test-{{ index }} .panel-table">
+                <strong>{{ result.results.name }}</strong> {{ result.title }}
+            </a>
+
+            <span class="badge pull-right">{{ result.results.tests|length }} tests</span>
+        </h4>
+    </div>
+
+    {# The bench description. #}
+    <div class="panel-body">
+        <p>{{ result.description }}</p>
+    </div>
+
+    {# The results table, inside a div to allow for collapsing. #}
+    {% include "bench-results.twig" with { "tests": result.results.tests } only %}
+
+    {# The bench. #}
+    <div class="panel-footer"><small>{{ result.results.filename }}</small></div>
+</div>

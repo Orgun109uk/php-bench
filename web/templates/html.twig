@@ -1,7 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>phpBench</title>
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="web/assets/css/php-bench.css">
+
+    <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </head>
 <body>
+    <div class="container-fluid">
+        <div role="main" class="row">
+            <div class="col-sm-12 col-md-8 col-md-offset-2">
+                {% include "header.twig" only %}
+                {% include "ad-banner.twig" only %}
+                {% include "intro.twig" only %}
+
+                <div class="row">
+                    <div class="col-md-12">
+                        {% if exception %}
+                        <div class="alert alert-danger" role="alert">
+                            <strong>There was an error!</strong> {{ exception }}
+                        </div>
+                        {% else %}
+                        {% include "benches.twig" with { "results": results } only %}
+                        {% endif %}
+                    </div>
+                </div>
+
+                {% include "ad-banner.twig" only %}
+
+                {% include "footer.twig" only %}
+            </div>
+        </div>
+    </div>
 </body>
