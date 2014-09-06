@@ -8,13 +8,13 @@
                 <td>
                     <div class="progress">
                         <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="{{ timePercentage }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ timePercentage }}%">
-                            {{ test.time }}µs
+                            {{ test.time }}&micro;s
                         </div>
                         {% if additionalTimePercentage > 0 %}
                         <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{ additionalTimePercentage }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ additionalTimePercentage }}%"></div>
                         {% endif %}
                     </div>
-                    <small>+{{ additionalTime }}µs</small>
+                    <small>+{{ additionalTime }}&micro;s</small>
                 </td>
                 <td>
                     <strong>{{ name }}</strong><br>{{ test.details|nl2br }}
