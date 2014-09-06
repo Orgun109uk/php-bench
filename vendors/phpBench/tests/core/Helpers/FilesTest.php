@@ -72,15 +72,6 @@ class FilesTest extends \PHPUnit_Framework_TestCase
         file_put_contents("{$this->dir}/subdir1/subsubdir1/filename4.txt", "");
         file_put_contents("{$this->dir}/filename5.txt", "");
 
-        $this->assertSame(
-            [
-                "{$this->dir}/filename1.txt",
-                "{$this->dir}/filename5.txt",
-                "{$this->dir}/subdir2/filename3.txt",
-                "{$this->dir}/subdir1/filename2.txt",
-                "{$this->dir}/subdir1/subsubdir1/filename4.txt",
-            ],
-            Files::rglob("{$this->dir}/*.txt")
-        );
+        $this->assertCount(5, Files::rglob("{$this->dir}/*.txt"));
     }
 }
