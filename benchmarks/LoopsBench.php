@@ -10,7 +10,7 @@
  */
 
 /**
-* PHP quotes bench
+* PHP loops bench
 */
 class LoopsBench extends \phpBench\BenchCase
 {
@@ -30,8 +30,6 @@ class LoopsBench extends \phpBench\BenchCase
         return [
             "iterations" => 1000,
             "title" => "Read loops",
-            "description" => "What is the best way to loop a hash array? Given is a Hash array with 100 elements, " .
-                "24byte key and 10k data per entry.",
         ];
     }
 

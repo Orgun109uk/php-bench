@@ -30,8 +30,6 @@ class SingleVsDoubleQuotesBench extends \phpBench\BenchCase
         return [
             "iterations" => 1000,
             "title" => "Quote types",
-            "description" => "See if there's any differences in using double (\") and single (') quotes for strings " .
-                "with 1,000 iterations.",
         ];
     }
 
