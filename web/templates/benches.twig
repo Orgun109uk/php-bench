@@ -1,7 +1,7 @@
 {% for index, result in results %}
     {% include "bench.twig" with { "index": index, "result": result } only %}
 
-    {% if (index is odd) %}
+    {% if index is odd and loop.last == false %}
     {% include "ad-banner.twig" only %}
     {% endif %}
 {% endfor %}
