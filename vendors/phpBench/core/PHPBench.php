@@ -16,9 +16,7 @@ namespace phpBench;
 require_once __DIR__ . "/Utils/ArrayData.php";
 require_once __DIR__ . "/Helpers/Files.php";
 require_once __DIR__ . "/BenchCase.php";
-require_once __DIR__ . "/BenchCase/DryRun.php";
 
-use phpBench\BenchCase\DryRun;
 use phpBench\Utils\ArrayData;
 use phpBench\Helpers\Files;
 
@@ -141,15 +139,12 @@ class PHPBench
     {
         $this->results = [];
         foreach ($this->benchCases as $benchCaseName => $benchCase) {
-            // Calibrate the base time.
-            $baseTime = $this->calibrate($benchCase->getConfig("iterations"));
-
             // Run the bench case.
             $results = $benchCase->run();
 
             // Render the results.
-            $this->results[$benchCaseName] = [
-                "base-time" => $baseTime,
+            $this->results[] = [
+                "name" => $benchCaseName,
                 "title" => $benchCase->getConfig("title", ""),
                 "description" => $benchCase->getConfig("description", ""),
                 "results" => $results,
@@ -157,28 +152,6 @@ class PHPBench
         }
 
         return $this;
-    }
-
-    /**
-     * Calibrate the bench.
-     *
-     * @param int $iterations
-     *   The number of iterations to run.
-     *
-     * @return float
-     *   The execution time of an empty bench.
-     *
-     * @access public
-     * @final
-     */
-    final public function calibrate($iterations)
-    {
-        // Create the dry run bench case and run it.
-        $benchCase = new DryRun([ "iterations" => $iterations ]);
-        $results = $benchCase->run();
-
-        // Return the run time of the bench test.
-        return array_pop($results["tests"])["time"];
     }
 
     /**

@@ -58,7 +58,7 @@ abstract class BenchCase
      */
     final private function startTimer()
     {
-        $this->startTime = microtime();
+        $this->startTime = microtime(true);
     }
 
     /**
@@ -71,12 +71,8 @@ abstract class BenchCase
      */
     final private function endTimer()
     {
-        $endTime = microtime();
-
-        $startE = explode(" ", $this->startTime);
-        $endE = explode(" ", $endTime);
-
-        return round(($endE[0] - $startE[0]) * 1000, 4);
+        $endTime = microtime(true);
+        return round(($endTime - $this->startTime) * 1000, 4);
     }
 
     /**
