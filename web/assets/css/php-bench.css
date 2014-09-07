@@ -3,3 +3,4 @@
 .bench-test-panel .panel-table table tr td:first-child { width: 150px; }
 .bench-test-panel .panel-table table tr td:first-child .progress { margin-bottom: 0; }
 .bench-test-panel .panel-footer small { color: #999; }
+.version-info { margin-bottom: 0; }

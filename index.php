@@ -44,6 +44,10 @@ function phpBenchShutdown()
         "html.twig",
         [
             "results" => $GLOBALS["bench_results"],
+            "versions" => [
+                "PHP" => phpversion(),
+                "Memory" => ini_get("memory_limit"),
+            ],
             "exception" => $error !== null ? $error["message"] : false,
         ]
     );

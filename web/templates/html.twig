@@ -24,6 +24,17 @@
         <div role="main" class="row">
             <div class="col-sm-12 col-md-8 col-md-offset-2">
                 {% include "header.twig" only %}
+
+                <div class="row">
+                    <div class="col-md-offset-2 col-md-8">
+                        <div class="version-info well well-sm">
+                            {% for title, version in versions %}
+                            <div><strong>{{ title }}: </strong>{{ version }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
                 {% include "ad-banner.twig" only %}
 
                 <div class="row">
