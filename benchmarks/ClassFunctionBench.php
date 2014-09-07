@@ -18,7 +18,7 @@ class ExampleClass
 }
 
 /**
-* PHP class function bench
+* PHP class function bench.
 */
 class ClassFunctionBench extends \phpBench\BenchCase
 {
@@ -41,6 +41,11 @@ class ClassFunctionBench extends \phpBench\BenchCase
         ];
     }
 
+    /**
+     * Setup the bench class.
+     *
+     * @access public
+     */
     public function setUp()
     {
         $this->obj = new ExampleClass();
