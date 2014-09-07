@@ -232,6 +232,7 @@ abstract class BenchCase
         $results = [
             "name" => get_class($this),
             "filename" => ltrim(str_replace(getcwd(), "", $ref->getFileName()), "/"),
+            "iterations" => $this->getConfig("iterations"),
             "min" => 99999999,
             "max" => -99999999,
             "tests" => [],
