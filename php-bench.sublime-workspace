@@ -415,7 +415,7 @@
 			"file": "index.php",
 			"settings":
 			{
-				"buffer_size": 1700,
+				"buffer_size": 1835,
 				"line_ending": "Unix"
 			}
 		},
@@ -423,7 +423,47 @@
 			"file": "vendors/phpBench/core/BenchCase.php",
 			"settings":
 			{
-				"buffer_size": 6735,
+				"buffer_size": 6717,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "web/templates/html.twig",
+			"settings":
+			{
+				"buffer_size": 3033,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "web/assets/css/php-bench.css",
+			"settings":
+			{
+				"buffer_size": 339,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "web/templates/header.twig",
+			"settings":
+			{
+				"buffer_size": 621,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "benchmarks/VariableTypeCheckingBench.php",
+			"settings":
+			{
+				"buffer_size": 2513,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "benchmarks/LoopsPreCountBench.php",
+			"settings":
+			{
+				"buffer_size": 2212,
 				"line_ending": "Unix"
 			}
 		},
@@ -431,7 +471,7 @@
 			"file": "vendors/phpBench/core/PHPBench.php",
 			"settings":
 			{
-				"buffer_size": 4167,
+				"buffer_size": 4130,
 				"line_ending": "Unix"
 			}
 		},
@@ -439,7 +479,7 @@
 			"file": "benchmarks/LoopsBench.php",
 			"settings":
 			{
-				"buffer_size": 4725,
+				"buffer_size": 3511,
 				"line_ending": "Unix"
 			}
 		}
@@ -475,20 +515,21 @@
 	},
 	"file_history":
 	[
-		"/code/repos/php-bench/web/templates/html.twig",
 		"/code/repos/php-bench/web/templates/bench.twig",
+		"/code/repos/php-bench/web/templates/bench-results.twig",
+		"/code/repos/php-bench/benchmarks/ClassFunctionBench.php",
+		"/code/repos/php-bench/web/templates/html.twig",
+		"/code/repos/php-bench/web/templates/benches.twig",
+		"/code/repos/php-bench/benchmarks/SingleVsDoubleQuotesBench.php",
 		"/code/repos/php-bench/web/templates/footer.twig",
 		"/code/repos/php-bench/vendors/phpBench/tests/core/Helpers/FilesTest.php",
 		"/code/repos/php-bench/web/templates/header.twig",
 		"/code/repos/php-bench/web/templates/intro.twig",
-		"/code/repos/php-bench/web/templates/bench-results.twig",
 		"/code/repos/php-bench/.travis.yml",
-		"/code/repos/php-bench/web/templates/benches.twig",
 		"/code/repos/php-bench/web/templates/ad-banner.twig",
 		"/code/repos/php-bench/web/assets/css/php-bench.css",
 		"/code/repos/php-bench/vendors/phpBench/core/PHPBench.php",
 		"/code/repos/php-bench/vendors/phpBench/core/BenchCase.php",
-		"/code/repos/php-bench/benchmarks/SingleVsDoubleQuotesBench.php",
 		"/code/repos/php-bench/.gitignore",
 		"/code/repos/php-bench/README.md",
 		"/code/repos/php-bench/reports/coverage.xml",
@@ -806,7 +847,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -815,15 +856,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1700,
+						"buffer_size": 1835,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1173,
-								1173
+								1343,
+								1343
 							]
 						],
 						"settings":
@@ -835,7 +876,7 @@
 						"translation.y": 353.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -844,15 +885,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6735,
+						"buffer_size": 6717,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1718,
-								1718
+								0,
+								0
 							]
 						],
 						"settings":
@@ -860,27 +901,169 @@
 							"syntax": "Packages/PHP/PHP.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 763.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "vendors/phpBench/core/PHPBench.php",
+					"file": "web/templates/html.twig",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4167,
+						"buffer_size": 3033,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3882,
-								3882
+								1633,
+								1621
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 85.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "web/assets/css/php-bench.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 339,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								338,
+								338
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "web/templates/header.twig",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 621,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								621,
+								621
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "benchmarks/VariableTypeCheckingBench.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2513,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2510,
+								2510
+							]
+						],
+						"settings":
+						{
+							"open_with_edit": true,
+							"syntax": "Packages/PHP/PHP.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1224.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "benchmarks/LoopsPreCountBench.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2212,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1445,
+								1445
+							]
+						],
+						"settings":
+						{
+							"open_with_edit": true,
+							"syntax": "Packages/PHP/PHP.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 750.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "vendors/phpBench/core/PHPBench.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4130,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3654,
+								3654
 							]
 						],
 						"settings":
@@ -891,24 +1074,24 @@
 						"translation.y": 2034.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 8,
 					"file": "benchmarks/LoopsBench.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4725,
+						"buffer_size": 3511,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4048,
-								4048
+								755,
+								755
 							]
 						],
 						"settings":
@@ -917,10 +1100,10 @@
 							"syntax": "Packages/PHP/PHP.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 2679.0,
+						"translation.y": 75.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 8,
 					"type": "text"
 				}
 			]

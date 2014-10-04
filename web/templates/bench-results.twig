@@ -1,4 +1,4 @@
-    <div class="panel-table collapse">
+    <div class="panel-table {% if index > 0 %}collapse{% endif %}">
         <table class="table">
             {% for name, test in tests %}
             {% set additionalTime = test.time - minTime %}

@@ -1,7 +1,14 @@
-{% for index, result in results %}
+{% set index = 0 %}
+{% set adIndex = 1 %}
+{% for result in results %}
     {% include "bench.twig" with { "index": index, "result": result } only %}
 
-    {% if index is odd and loop.last == false %}
+    {% if adIndex == 3 and loop.last == false %}
     {% include "ad-banner.twig" only %}
+    {% set adIndex = 1 %}
+    {% else %}
+    {% set adIndex = adIndex + 1 %}
     {% endif %}
+
+    {% set index = index + 1 %}
 {% endfor %}

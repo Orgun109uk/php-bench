@@ -4,6 +4,7 @@
     <div class="panel-heading">
         <h4 class="panel-title">
             <a data-toggle="collapse" data-parent="#accordion" href="#test-{{ index }} .panel-table">
+                <span class="fa fa-fw fa-plus-circle"></span>
                 <strong>{{ result.results.name }}</strong> {{ result.title }}
             </a>
 
@@ -14,7 +15,7 @@
     </div>
 
     {# The results table, inside a div to allow for collapsing. #}
-    {% include "bench-results.twig" with { "tests": result.results.tests, "minTime": result.results.min, "maxTime": result.results.max } only %}
+    {% include "bench-results.twig" with { "index": index, "tests": result.results.tests, "minTime": result.results.min, "maxTime": result.results.max } only %}
 
     {# The bench. #}
     <div class="panel-footer"><small>{{ result.results.filename }}</small></div>
